@@ -4,8 +4,9 @@ import { toast, ToastContainer } from 'react-toastify';
 import { ArrowLeft, Clapperboard, Eye, Film, Popcorn } from 'lucide-react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import API_BASE from '../config';
 
-const API_BASE = 'http://localhost:5000/api/auth'
+const AUTH_API = `${API_BASE}/api/auth`;
 
 function LoginPage() {
     const [formData, setFormData] = useState({
@@ -39,7 +40,7 @@ function LoginPage() {
                 email: formData.email.trim(),
                 password: formData.password,
             };
-            const response = await axios.post(`${API_BASE}/login`, payload, {
+            const response = await axios.post(`${AUTH_API}/login`, payload, {
                 headers: { 'Content-Type': 'application/json' }
             });
 

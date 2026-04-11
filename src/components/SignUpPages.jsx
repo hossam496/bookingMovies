@@ -3,8 +3,9 @@ import { signUpStyles } from '../assets/dummyStyles'
 import { toast, ToastContainer } from 'react-toastify'
 import { ArrowLeft, Calendar, Clapperboard, Eye, EyeOff, Film, Lock, Mail, Phone, Ticket, User } from 'lucide-react';
 import axios from 'axios'
+import API_BASE from '../config'
 
-const API_BASE = 'http://localhost:5000/api/auth'
+const AUTH_API = `${API_BASE}/api/auth`
 
 function SignUpPages() {
     const [formData, setFormData] = useState({
@@ -108,7 +109,7 @@ function SignUpPages() {
         birthDate: formData.birthDate,
         password: formData.password,
             };
-            const response = await axios.post(`${API_BASE}/register`, payload , {
+            const response = await axios.post(`${AUTH_API}/register`, payload , {
                 headers: {
                     'Content-Type': 'application/json'
                 },

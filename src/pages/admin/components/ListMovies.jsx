@@ -3,8 +3,8 @@ import axios from 'axios';
 import { Search, Film, Star, Clock, Calendar, Ticket, Play, Trash2, ShieldAlert, Edit2 } from 'lucide-react';
 
 import Swal from 'sweetalert2';
+import API_BASE from '../../../config';
 
-const API_BASE = 'http://localhost:5000';
 
 const getImageUrl = (maybe) => {
   if (!maybe) return null;

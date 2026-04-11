@@ -3,8 +3,8 @@ import axios from 'axios';
 import { Users as UsersIcon, Search, Mail, Phone, Calendar, Shield, Activity, ShieldAlert, CheckCircle, Clock, Trash2, UserPlus, UserMinus, ShieldCheck } from 'lucide-react';
 
 import Swal from 'sweetalert2';
+import API_BASE from '../../config';
 
-const API_BASE = 'http://localhost:5000';
 
 const Users = () => {
   const [users, setUsers] = useState([]);

@@ -14,8 +14,8 @@ import {
 } from "lucide-react";
 import { toast } from "react-toastify";
 import { movieDetailHStyles } from "../assets/dummyStyles";
+import API_BASE from "../config";
 
-const API_BASE = "http://localhost:5000";
 
 const ROWS = [
   { id: "A", type: "standard", count: 8 },

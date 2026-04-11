@@ -4,8 +4,7 @@ import { bookingsPageStyles } from '../assets/dummyStyles';
 import QRCode from 'qrcode';
 import axios from 'axios';
 import { Film, Clock, MapPin, QrCode, ChevronDown, X } from 'lucide-react';
-
-const API_BASE = "http://localhost:5000";
+import API_BASE from '../config';
 
 function getStoredToken() {
   return (

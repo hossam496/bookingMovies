@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { moviesStyles } from '../assets/dummyStyles'
 import { Link } from 'react-router-dom'
 import { Ticket } from 'lucide-react'
+import API_BASE from '../config'
 
-const API_BASE = 'http://localhost:5000'
 const PLACEHOLDER = "https://via.placeholder.com/400x600?text=No+Poster";
 
 const getUploadUrl = (maybe) => {

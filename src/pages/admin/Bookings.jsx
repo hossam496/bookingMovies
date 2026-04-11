@@ -3,8 +3,8 @@ import axios from 'axios';
 import { Ticket, Search, Calendar, CreditCard, User, AlertCircle, Clock, Trash2, CheckCircle2, XCircle } from 'lucide-react';
 
 import Swal from 'sweetalert2';
+import API_BASE from '../../config';
 
-const API_BASE = 'http://localhost:5000';
 
 const Bookings = () => {
   const [bookings, setBookings] = useState([]);

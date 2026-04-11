@@ -2,9 +2,8 @@ import React, { useEffect, useMemo, useState } from 'react';
 import axios from 'axios';
 import { Users, Film, Link as LinkIcon, DollarSign, Activity, PlusCircle, UserCog, ClipboardList } from 'lucide-react';
 import { NavLink } from 'react-router-dom';
+import API_BASE from '../../config';
 
-
-const API_BASE = 'http://localhost:5000';
 
 const fmtINR = (num) =>
   typeof num === "number"

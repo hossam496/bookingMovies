@@ -3,6 +3,7 @@ import { useSearchParams } from 'react-router-dom';
 import axios from 'axios';
 
 import { Film, Plus } from 'lucide-react';
+import API_BASE from '../../config';
 import ListMovies from './components/ListMovies';
 import AddMovie from './components/AddMovie';
 
@@ -12,7 +13,7 @@ const Movies = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const editId = searchParams.get('edit');
   const section = searchParams.get('section');
-  const API_BASE = 'http://localhost:5000';
+
 
 
   useEffect(() => {
