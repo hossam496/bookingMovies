@@ -8,10 +8,14 @@ import {
   Clock,
   Star,
   Play,
+  User,
+  Shield,
+  Edit2,
   X,
   Users,
-  User,
 } from "lucide-react";
+
+
 import { toast } from "react-toastify";
 import { movieDetailHStyles } from "../assets/dummyStyles";
 
@@ -173,6 +177,19 @@ export default function MovieDetailPage() {
   const [selectedDay, setSelectedDay] = useState(0);
   const [selectedTime, setSelectedTime] = useState(null);
   const [bookedMap, setBookedMap] = useState({});
+  const [isAdmin, setIsAdmin] = useState(false);
+
+  useEffect(() => {
+    try {
+      const user = JSON.parse(localStorage.getItem('user'));
+      if (user && user.role === 'admin') {
+        setIsAdmin(true);
+      }
+    } catch (err) {
+      console.error('Error checking admin status', err);
+    }
+  }, []);
+
 
   // تحقق من معلمة ID عند تحميل المكون
   useEffect(() => {
@@ -580,7 +597,9 @@ export default function MovieDetailPage() {
   const formattedDuration = formatDuration(movie.duration ?? movie.runtime);
 
   return (
-    <div className={movieDetailHStyles.pageContainer}>
+    <>
+      <div className={movieDetailHStyles.pageContainer}>
+
       {showTrailer && selectedTrailerId && (
         <div className={movieDetailHStyles.trailerModal}>
           <div className={movieDetailHStyles.trailerContainer}>
@@ -614,7 +633,19 @@ export default function MovieDetailPage() {
             <ArrowLeft size={18} />{" "}
             <span className={movieDetailHStyles.backButtonText}>Back</span>
           </Link>
+
+          {isAdmin && (
+            <Link 
+              to={`/admin/movies?edit=${movie._id || movie.id}`}
+              className="flex items-center gap-2 px-4 py-1.5 bg-red-600/20 text-red-500 border border-red-500/50 rounded-lg hover:bg-red-600 hover:text-white transition-all shadow-lg backdrop-blur-sm"
+              style={{ fontSize: '0.85rem', fontWeight: 'bold' }}
+            >
+              <Shield size={16} />
+              Edit in Dashboard
+            </Link>
+          )}
         </div>
+
 
         <div className={movieDetailHStyles.titleContainer}>
           <h1
@@ -680,7 +711,17 @@ export default function MovieDetailPage() {
               >
                 <Calendar className={movieDetailHStyles.showtimesTitleIcon} />
                 <span>Showtimes</span>
+                {isAdmin && (
+                  <Link 
+                    to={`/admin/movies?edit=${movie._id || movie.id}&section=showtimes`}
+                    className="ml-2 p-1 text-red-500 hover:bg-red-500/10 rounded-full transition-colors"
+                    title="Edit Showtimes"
+                  >
+                    <Edit2 size={14} />
+                  </Link>
+                )}
               </h3>
+
 
               <div className={movieDetailHStyles.daySelection}>
                 {showtimeDays.length ? (
@@ -779,7 +820,17 @@ export default function MovieDetailPage() {
               >
                 <Users className={movieDetailHStyles.castTitleIcon} />
                 <span>Cast</span>
+                {isAdmin && (
+                  <Link 
+                    to={`/admin/movies?edit=${movie._id || movie.id}&section=cast`}
+                    className="ml-2 p-1 text-red-500 hover:bg-red-500/10 rounded-full transition-colors"
+                    title="Edit Cast"
+                  >
+                    <Edit2 size={14} />
+                  </Link>
+                )}
               </h3>
+
               <div className={movieDetailHStyles.castGrid}>
                 {movie.cast && movie.cast.length ? (
                   movie.cast.map((c, idx) => (
@@ -838,11 +889,23 @@ export default function MovieDetailPage() {
         </div>
 
         <div className={movieDetailHStyles.crewGrid}>
+          {/* Director Card */}
           <div className={movieDetailHStyles.crewCard}>
             <div className={movieDetailHStyles.crewTitle}>
               <User className={movieDetailHStyles.crewIcon} />
-              <h3 style={{ fontFamily: "'Cinzel', serif" }}>Director</h3>
+              <div className="flex items-center">
+                <h3 style={{ fontFamily: "'Cinzel', serif" }}>Director</h3>
+                {isAdmin && (
+                  <Link 
+                    to={`/admin/movies?edit=${movie._id || movie.id}&section=director`}
+                    className="ml-2 p-1 text-red-500 hover:bg-red-500/10 rounded-full transition-colors"
+                  >
+                    <Edit2 size={12} />
+                  </Link>
+                )}
+              </div>
             </div>
+
             <div className={movieDetailHStyles.crewContent}>
               {(() => {
                 const directors = Array.isArray(movie.directors)
@@ -897,11 +960,23 @@ export default function MovieDetailPage() {
             </div>
           </div>
 
+          {/* Producer Card */}
           <div className={movieDetailHStyles.crewCard}>
             <div className={movieDetailHStyles.crewTitle}>
               <User className={movieDetailHStyles.crewIcon} />
-              <h3 style={{ fontFamily: "'Cinzel', serif" }}>Producer</h3>
+              <div className="flex items-center">
+                <h3 style={{ fontFamily: "'Cinzel', serif" }}>Producer</h3>
+                {isAdmin && (
+                  <Link 
+                    to={`/admin/movies?edit=${movie._id || movie.id}&section=producer`}
+                    className="ml-2 p-1 text-red-500 hover:bg-red-500/10 rounded-full transition-colors"
+                  >
+                    <Edit2 size={12} />
+                  </Link>
+                )}
+              </div>
             </div>
+
             <div className={movieDetailHStyles.crewContent}>
               {producerImg ? (
                 <img
@@ -924,9 +999,11 @@ export default function MovieDetailPage() {
             </div>
           </div>
         </div>
+
       </div>
 
       <style>{movieDetailHStyles.customCSS}</style>
     </div>
+    </>
   );
 }

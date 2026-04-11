@@ -337,7 +337,7 @@ function Trailers() {
 
   return (
     <div className={trailersStyles.container}>
-      <style jsx>{`
+      <style>{`
         .custom-scrollbar::-webkit-scrollbar {
           height: 6px;
         }

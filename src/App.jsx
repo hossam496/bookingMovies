@@ -11,6 +11,14 @@ import MovieDetailPage from "./pages/MovieDetailPage";
 import SeatSelector from "./pages/SeatSelctor";
 import VerifyPaymentPage from "../VerifyPaymentPage";
 
+// Admin Imports
+import ProtectedRoute from "./routes/ProtectedRoute";
+import AdminLayout from "./pages/admin/AdminLayout";
+import Dashboard from "./pages/admin/Dashboard";
+import AdminMovies from "./pages/admin/Movies";
+import AdminBookings from "./pages/admin/Bookings";
+import AdminUsers from "./pages/admin/Users";
+
 /**
  * ScrollToTop component:
  * - Forces an immediate jump to the very top on every navigation.
@@ -112,6 +120,19 @@ function App() {
           />
           <Route path="/success" element={<VerifyPaymentPage/>}/>
           <Route path="/cancel" element={<VerifyPaymentPage/>}/>
+
+          {/* Admin Routes */}
+          <Route path="/admin" element={
+            <ProtectedRoute requiredRole="admin">
+              <AdminLayout />
+            </ProtectedRoute>
+          }>
+            <Route index element={<Dashboard />} />
+            <Route path="dashboard" element={<Dashboard />} />
+            <Route path="movies" element={<AdminMovies />} />
+            <Route path="bookings" element={<AdminBookings />} />
+            <Route path="users" element={<AdminUsers />} />
+          </Route>
         </Routes>
       </div>
     </>

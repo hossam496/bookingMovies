@@ -57,9 +57,10 @@ export const navbarStyles = {
   
   // Logo section
   logoContainer: "flex items-center gap-3 z-20 flex-shrink-0",
-  logoIconContainer: "bg-black p-3 md:p-3 xl:p-3 lg:p-3 rounded-full border border-red-600",
-  logoIcon: "h-4 w-4 md:h-2 md:w-2 lg:h-4 lg:w-4 xl:w-4 xl:h-4  text-red-500",
-  logoText: "text-lg md:text-sm xl:text-lg lg:tex-lg font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-red-400 to-red-200 font-[pacifico]",
+  logoIconContainer: "bg-black/50 p-2 rounded-full border border-red-600/50 backdrop-blur-sm shadow-[0_0_15px_rgba(220,38,38,0.2)]",
+  logoIcon: "h-5 w-5 text-red-500",
+  logoText: "text-xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-red-500 via-red-300 to-white font-[pacifico] tracking-tight",
+
 
   // Desktop navigation
   desktopNav: "hidden lg:flex absolute left-1/2 transform -translate-x-1/2 z-10 items-center bg-black/70 backdrop-blur-md rounded-full px-3 py-2 gap-2 shadow-inner",
@@ -86,8 +87,10 @@ export const navbarStyles = {
   tabletNavText: "text-xs font-semibold",
 
   // Auth section
-  authSection: "flex items-center gap-2",
-  desktopAuth: "hidden md:block",
+  authSection: "flex items-center gap-3",
+  desktopAuth: "hidden md:flex items-center gap-3",
+  adminShortcut: "p-2 rounded-full bg-red-600/10 hover:bg-red-600/20 text-red-500 border border-red-600/20 backdrop-blur-md transition-all duration-300 hover:shadow-[0_0_15px_rgba(220,38,38,0.3)] hover:-translate-y-0.5",
+
   logoutButton: "flex items-center gap-2 md:px-1.5 px-4 lg:px-4 xl:px-4  py-2 rounded-full bg-gradient-to-r from-gray-700 to-gray-800 text-white text-sm font-semibold border border-red-600/20",
   loginButton: "flex items-center gap-2 px-4 py-2 md:px-1.5 lg:px-4 xl:px-4 rounded-full bg-gradient-to-r from-red-300 to-red-700 text-white text-sm font-semibold border border-red-600/20",
   authIcon: "h-4 w-4",

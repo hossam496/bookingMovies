@@ -158,7 +158,7 @@ function News() {
           </aside>
         </section>
       </main>
-      <style jsx>{newsCSS}</style>
+      <style>{newsCSS}</style>
     </div>
   )
 }

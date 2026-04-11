@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { navbarCSS, navbarStyles } from "../assets/dummyStyles"
-import { Calendar, Clapperboard, Home, Film, Mail, Ticket, LogOut, User, Menu, X } from 'lucide-react';
+import { Calendar, Clapperboard, Home, Film, Mail, Ticket, LogOut, User, Menu, X, Shield } from 'lucide-react';
 import { NavLink } from 'react-router-dom';
 
 function Navbar() {
@@ -8,6 +8,7 @@ function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userEmail, setUserEmail] = useState("");
+  const [isAdmin, setIsAdmin] = useState(false);
 
   const menuRef = useRef(null);
 
@@ -19,6 +20,21 @@ function Navbar() {
 
   // Read auth stat from local storage
   const readAuthFromStorage = () => {
+    let adminFlag = false;
+    try {
+      const userStr = localStorage.getItem("user");
+      if (userStr) {
+        const userObj = JSON.parse(userStr);
+        if (userObj.role === 'admin' || userObj.isAdmin) adminFlag = true;
+      }
+      const token = localStorage.getItem("token");
+      if (token) {
+        const decoded = JSON.parse(atob(token.split('.')[1]));
+        if (decoded.role === 'admin' || decoded.isAdmin) adminFlag = true;
+      }
+    } catch (e) {}
+    setIsAdmin(adminFlag);
+
     const json = localStorage.getItem('cine_auth');
     if (json) {
       try {
@@ -98,6 +114,8 @@ function Navbar() {
     { id: "bookings", label: "Bookings", Icon: Ticket, path: "/bookings" }
   ];
 
+
+
   return (
     <nav className={`${navbarStyles.nav.base} ${
       isScrolled ? navbarStyles.nav.scrolled : navbarStyles.nav.notScrolled
@@ -163,7 +181,18 @@ function Navbar() {
           {/* Auth section */}
           <div className={navbarStyles.authSection}>
             <div className={navbarStyles.desktopAuth}>
+              {isAdmin && (
+                <NavLink 
+                  to="/admin/dashboard" 
+                  title="Admin Dashboard"
+                  className={navbarStyles.adminShortcut}
+                >
+                  <Shield size={20} />
+                </NavLink>
+              )}
+
               {isLoggedIn ? (
+
                 <button
                   title={userEmail || "Logout"}
                   onClick={handleLogout}
@@ -238,7 +267,7 @@ function Navbar() {
           </div>
         )}
       </div>
-      <style jsx>{navbarCSS}</style>
+      <style>{navbarCSS}</style>
     </nav>
   );
 }

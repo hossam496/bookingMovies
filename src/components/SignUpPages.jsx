@@ -115,7 +115,7 @@ function SignUpPages() {
             });
 
             if (response.data && response.data.success) {
-                toast.success("Account created successfully! Redirecting to login...");
+                toast.success("Account created successfully! Redirecting to homepage...");
 
                 if(response.data.token) {
                     localStorage.setItem("token", response.data.token);
@@ -125,7 +125,7 @@ function SignUpPages() {
                 }
 
                 setTimeout(() => {
-                    window.location.href = "/login";
+                    window.location.href = "/";
                 }, 1200)
             } else {
                 toast.error(response.data?.message || "Registration failed. Please try again.")

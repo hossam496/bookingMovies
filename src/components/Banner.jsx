@@ -57,7 +57,7 @@ function Banner() {
             </div>
         </div>
       </div>
-      <style jsx>{bannerStyles.customCSS}</style>
+      <style>{bannerStyles.customCSS}</style>
     </div>
   )
 }
