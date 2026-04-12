@@ -41,7 +41,8 @@ function LoginPage() {
                 password: formData.password,
             };
             const response = await axios.post(`${AUTH_API}/login`, payload, {
-                headers: { 'Content-Type': 'application/json' }
+                headers: { 'Content-Type': 'application/json' },
+                withCredentials: true
             });
 
             const data = response.data;

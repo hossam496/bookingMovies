@@ -101,27 +101,27 @@ function SignUpPages() {
 
         try {
             const payload = {
-                
-        fullName: formData.fullName.trim(),
-        username: formData.username.trim(),
-        email: formData.email.trim(),
-        phone: formData.phone.trim(),
-        birthDate: formData.birthDate,
-        password: formData.password,
+                fullName: formData.fullName.trim(),
+                username: formData.username.trim(),
+                email: formData.email.trim(),
+                phone: formData.phone.trim(),
+                birthDate: formData.birthDate,
+                password: formData.password,
             };
-            const response = await axios.post(`${AUTH_API}/register`, payload , {
+            const response = await axios.post(`${AUTH_API}/register`, payload, {
                 headers: {
                     'Content-Type': 'application/json'
                 },
+                withCredentials: true
             });
 
             if (response.data && response.data.success) {
                 toast.success("Account created successfully! Redirecting to homepage...");
 
-                if(response.data.token) {
+                if (response.data.token) {
                     localStorage.setItem("token", response.data.token);
                 }
-                if(response.data.user) {
+                if (response.data.user) {
                     localStorage.setItem("user", JSON.stringify(response.data.user));
                 }
 
