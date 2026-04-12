@@ -687,7 +687,7 @@ export default function MovieDetailPage() {
                   onError={(e) => {
                     e.currentTarget.onerror = null;
                     e.currentTarget.src =
-                      "https://via.placeholder.com/320x480?text=No+Image";
+                      "https://placehold.co/320x480?text=No+Image";
                   }}
                   className={movieDetailHStyles.posterImage}
                 />
@@ -851,7 +851,7 @@ export default function MovieDetailPage() {
                             onError={(e) => {
                               e.currentTarget.onerror = null;
                               e.currentTarget.src =
-                                "https://via.placeholder.com/80?text=A";
+                                "https://placehold.co/80?text=A";
                             }}
                           />
                         ) : (
@@ -933,7 +933,7 @@ export default function MovieDetailPage() {
                               onError={(e) => {
                                 e.currentTarget.onerror = null;
                                 e.currentTarget.src =
-                                  "https://via.placeholder.com/96?text=D";
+                                  "https://placehold.co/96?text=D";
                               }}
                             />
                           ) : (
@@ -987,7 +987,7 @@ export default function MovieDetailPage() {
                   onError={(e) => {
                     e.currentTarget.onerror = null;
                     e.currentTarget.src =
-                      "https://via.placeholder.com/96?text=P";
+                      "https://placehold.co/96?text=P";
                   }}
                 />
               ) : (

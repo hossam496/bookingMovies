@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { releasesStyles } from '../assets/dummyStyles'
 import API_BASE from '../config'
 
-const PLACEHOLDER_IMG = "https://via.placeholder.com/400x600?text=No+Image";
+const PLACEHOLDER_IMG = "https://placehold.co/400x600?text=No+Image";
 
 // to get img from uploads folder
 const getUploadUrl = (maybeFilenameOrUrl) => {

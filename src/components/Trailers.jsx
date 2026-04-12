@@ -3,7 +3,7 @@ import { trailersStyles } from '../assets/dummyStyles'
 import { Calendar, ChevronLeft, ChevronRight, Clapperboard, Clock, Play, X } from 'lucide-react'
 import API_BASE from '../config'
 
-const PLACEHOLDER_THUMB = "https://via.placeholder.com/800x450?text=No+Thumbnail";
+const PLACEHOLDER_THUMB = "https://placehold.co/800x450?text=No+Thumbnail";
 
 const getUploadUrl = (input) => {
   if (!input) return null;

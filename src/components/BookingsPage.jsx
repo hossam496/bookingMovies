@@ -324,7 +324,7 @@ function BookingsPage() {
                           alt={b.title}
                           className={bookingsPageStyles.poster}
                           onError={(e) => {
-                            e.target.src = 'https://via.placeholder.com/400x600?text=No+Poster';
+                            e.target.src = 'https://placehold.co/400x600?text=No+Poster';
                           }}
                         />
                       ) : (

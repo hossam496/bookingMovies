@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { Ticket } from 'lucide-react'
 import API_BASE from '../config'
 
-const PLACEHOLDER = "https://via.placeholder.com/400x600?text=No+Poster";
+const PLACEHOLDER = "https://placehold.co/400x600?text=No+Poster";
 
 const getUploadUrl = (maybe) => {
   if (!maybe) return null;
