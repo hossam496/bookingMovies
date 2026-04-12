@@ -109,7 +109,6 @@ function SignUpPages() {
                 password: formData.password,
             };
             const response = await axios.post(`${AUTH_API}/register`, formData, {
-                withCredentials: true, // ضرورية جداً مع CORS
                 headers: {
                     'Content-Type': 'application/json'
                 }
