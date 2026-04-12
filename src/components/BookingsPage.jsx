@@ -279,7 +279,7 @@ function BookingsPage() {
         <header className={bookingsPageStyles.header}>
           <h1 className={bookingsPageStyles.title}>Your Tickets</h1>
         </header>
-        
+
         {loading && (
           <div className={bookingsPageStyles.loading}>
             <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-red-500 mr-3"></div>
@@ -297,7 +297,7 @@ function BookingsPage() {
               <div className="text-4xl mb-4">🎬</div>
               <h3 className="text-xl font-bold mb-2">No Bookings Found</h3>
               <p className="text-gray-400 mb-4">You haven't booked any tickets yet.</p>
-              <button 
+              <button
                 onClick={() => navigate('/movies')}
                 className="px-6 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition"
               >
@@ -389,9 +389,8 @@ function BookingsPage() {
                   </div>
 
                   <div
-                    className={`${bookingsPageStyles.expandedDetails} ${
-                      isOpen ? bookingsPageStyles.expandedOpen : bookingsPageStyles.expandedClosed
-                    }`}
+                    className={`${bookingsPageStyles.expandedDetails} ${isOpen ? bookingsPageStyles.expandedOpen : bookingsPageStyles.expandedClosed
+                      }`}
                     aria-hidden={!isOpen}
                   >
                     <div className={bookingsPageStyles.seatsSection}>
@@ -405,14 +404,13 @@ function BookingsPage() {
                             className={bookingsPageStyles.seatItem}
                           >
                             <div className={bookingsPageStyles.seatId}>
-                              {s.id || s || `Seat ${index + 1}`}
+                              {typeof s === 'object' ? (s.id || s.seatNumber || s.name) : s}
                             </div>
                             <div
-                              className={`${bookingsPageStyles.seatType} ${
-                                s.type === "recliner"
+                              className={`${bookingsPageStyles.seatType} ${s.type === "recliner"
                                   ? bookingsPageStyles.seatTypeRecliner
                                   : bookingsPageStyles.seatTypeStandard
-                              }`}
+                                }`}
                             >
                               {s.type === "recliner" ? "Recliner" : "Standard"}
                             </div>
@@ -468,9 +466,8 @@ function BookingsPage() {
                     >
                       <span>{isOpen ? "Hide details" : "View details"}</span>
                       <ChevronDown
-                        className={`${bookingsPageStyles.chevron} ${
-                          isOpen ? bookingsPageStyles.chevronOpen : bookingsPageStyles.chevronClosed
-                        }`}
+                        className={`${bookingsPageStyles.chevron} ${isOpen ? bookingsPageStyles.chevronOpen : bookingsPageStyles.chevronClosed
+                          }`}
                       />
                     </button>
                   </div>
