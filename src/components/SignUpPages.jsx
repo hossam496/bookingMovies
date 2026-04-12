@@ -108,11 +108,11 @@ function SignUpPages() {
                 birthDate: formData.birthDate,
                 password: formData.password,
             };
-            const response = await axios.post(`${AUTH_API}/register`, payload, {
+            const response = await axios.post(`${AUTH_API}/register`, formData, {
+                withCredentials: true, // ضرورية جداً مع CORS
                 headers: {
                     'Content-Type': 'application/json'
-                },
-                withCredentials: true
+                }
             });
 
             if (response.data && response.data.success) {
@@ -132,24 +132,24 @@ function SignUpPages() {
                 toast.error(response.data?.message || "Registration failed. Please try again.")
             }
         } catch (err) {
-      console.error("Registration error:", err);
-      // If backend returned an error message, try to map it to a field
-      const serverMsg =
-        err?.response?.data?.message || err?.message || "Server error";
+            console.error("Registration error:", err);
+            // If backend returned an error message, try to map it to a field
+            const serverMsg =
+                err?.response?.data?.message || err?.message || "Server error";
 
-      // Map common backend messages to the form fields
-      if (serverMsg.toLowerCase().includes("email")) {
-        setErrors((prev) => ({ ...prev, email: serverMsg }));
-      } else if (serverMsg.toLowerCase().includes("username")) {
-        setErrors((prev) => ({ ...prev, username: serverMsg }));
-      } else if (serverMsg.toLowerCase().includes("phone")) {
-        setErrors((prev) => ({ ...prev, phone: serverMsg }));
-      } else {
-        toast.error(serverMsg);
-      }
-    } finally {
-        setIsLoading(false)
-    }
+            // Map common backend messages to the form fields
+            if (serverMsg.toLowerCase().includes("email")) {
+                setErrors((prev) => ({ ...prev, email: serverMsg }));
+            } else if (serverMsg.toLowerCase().includes("username")) {
+                setErrors((prev) => ({ ...prev, username: serverMsg }));
+            } else if (serverMsg.toLowerCase().includes("phone")) {
+                setErrors((prev) => ({ ...prev, phone: serverMsg }));
+            } else {
+                toast.error(serverMsg);
+            }
+        } finally {
+            setIsLoading(false)
+        }
     };
 
     return (
@@ -219,9 +219,8 @@ function SignUpPages() {
                                             value={formData.fullName}
                                             onChange={handleChange}
                                             name="fullName"
-                                            className={`${signUpStyles.input.base} ${
-                                                errors.fullName ? signUpStyles.input.error : signUpStyles.input.normal
-                                            } ${signUpStyles.inputWithIcon}`}
+                                            className={`${signUpStyles.input.base} ${errors.fullName ? signUpStyles.input.error : signUpStyles.input.normal
+                                                } ${signUpStyles.inputWithIcon}`}
                                             placeholder="Enter your full name"
                                         />
                                         <div className={signUpStyles.inputIcon}>
@@ -247,9 +246,8 @@ function SignUpPages() {
                                             value={formData.username}
                                             onChange={handleChange}
                                             name="username"
-                                            className={`${signUpStyles.input.base} ${
-                                                errors.username ? signUpStyles.input.error : signUpStyles.input.normal
-                                            } ${signUpStyles.inputWithIcon}`}
+                                            className={`${signUpStyles.input.base} ${errors.username ? signUpStyles.input.error : signUpStyles.input.normal
+                                                } ${signUpStyles.inputWithIcon}`}
                                             placeholder="Choose a username"
                                         />
                                         <div className={signUpStyles.inputIcon}>
@@ -275,9 +273,8 @@ function SignUpPages() {
                                             value={formData.email}
                                             onChange={handleChange}
                                             name="email"
-                                            className={`${signUpStyles.input.base} ${
-                                                errors.email ? signUpStyles.input.error : signUpStyles.input.normal
-                                            } ${signUpStyles.inputWithIcon}`}
+                                            className={`${signUpStyles.input.base} ${errors.email ? signUpStyles.input.error : signUpStyles.input.normal
+                                                } ${signUpStyles.inputWithIcon}`}
                                             placeholder="your@example.com"
                                         />
                                         <div className={signUpStyles.inputIcon}>
@@ -303,9 +300,8 @@ function SignUpPages() {
                                             value={formData.phone}
                                             onChange={handleChange}
                                             name="phone"
-                                            className={`${signUpStyles.input.base} ${
-                                                errors.phone ? signUpStyles.input.error : signUpStyles.input.normal
-                                            } ${signUpStyles.inputWithIcon}`}
+                                            className={`${signUpStyles.input.base} ${errors.phone ? signUpStyles.input.error : signUpStyles.input.normal
+                                                } ${signUpStyles.inputWithIcon}`}
                                             placeholder="+20 01011271243"
                                         />
                                         <div className={signUpStyles.inputIcon}>
@@ -333,9 +329,8 @@ function SignUpPages() {
                                             value={formData.birthDate}
                                             onChange={handleChange}
                                             name="birthDate"
-                                            className={`${signUpStyles.input.base} ${
-                                                errors.birthDate ? signUpStyles.input.error : signUpStyles.input.normal
-                                            } ${signUpStyles.inputWithIcon}`}
+                                            className={`${signUpStyles.input.base} ${errors.birthDate ? signUpStyles.input.error : signUpStyles.input.normal
+                                                } ${signUpStyles.inputWithIcon}`}
                                         />
                                         <div className={signUpStyles.inputIcon}>
                                             <Calendar size={18} />
@@ -360,9 +355,8 @@ function SignUpPages() {
                                             value={formData.password}
                                             onChange={handleChange}
                                             name="password"
-                                            className={`${signUpStyles.input.base} ${
-                                                errors.password ? signUpStyles.input.error : signUpStyles.input.normal
-                                            } ${signUpStyles.inputWithToggle}`}
+                                            className={`${signUpStyles.input.base} ${errors.password ? signUpStyles.input.error : signUpStyles.input.normal
+                                                } ${signUpStyles.inputWithToggle}`}
                                             placeholder="Create a strong password"
                                         />
                                         <div className={signUpStyles.inputIcon}>
@@ -392,30 +386,29 @@ function SignUpPages() {
                                 <button
                                     type="submit"
                                     disabled={isLoading}
-                                    className={`${signUpStyles.submitButton.base} ${
-                                        isLoading ? signUpStyles.submitButtonLoading : ""
-                                    }`}
+                                    className={`${signUpStyles.submitButton.base} ${isLoading ? signUpStyles.submitButtonLoading : ""
+                                        }`}
                                 >
                                     {isLoading ? (
-                                        <div className= {signUpStyles.submitContent}>
-                                            <div className= {signUpStyles.loadingSpinner}></div>
+                                        <div className={signUpStyles.submitContent}>
+                                            <div className={signUpStyles.loadingSpinner}></div>
                                             CREATING OUR ACCOUNT ...
                                         </div>
                                     ) : (
-                                        <div className= {signUpStyles.submitContent}>
-                                            <Film size={20} className= {signUpStyles.submitIcon} />
-                                            <span className= "font-cinema">CREAT CINEMA ACCOUNT</span>
+                                        <div className={signUpStyles.submitContent}>
+                                            <Film size={20} className={signUpStyles.submitIcon} />
+                                            <span className="font-cinema">CREAT CINEMA ACCOUNT</span>
                                         </div>
-                                    )} 
+                                    )}
                                 </button>
                             </div>
                         </form>
 
-                        <div className= {signUpStyles.loginContainer}>
-                            <p className= {signUpStyles.loginText}>
+                        <div className={signUpStyles.loginContainer}>
+                            <p className={signUpStyles.loginText}>
                                 Already have an account ? {"  "}
-                                <a href="/login" className= {signUpStyles.loginLink}>
-                                Sign in your account
+                                <a href="/login" className={signUpStyles.loginLink}>
+                                    Sign in your account
                                 </a>
                             </p>
                         </div>
