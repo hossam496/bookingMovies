@@ -404,7 +404,10 @@ function BookingsPage() {
                             className={bookingsPageStyles.seatItem}
                           >
                             <div className={bookingsPageStyles.seatId}>
-                              {typeof s === 'object' ? (s.id || s.seatNumber || s.name) : s}
+                              {(() => {
+                                const val = typeof s === 'object' ? (s.id || s.seatId || s.seatNumber || s.name) : s;
+                                return (val && val !== 'undefinedundefined') ? val : `Seat ${index + 1}`;
+                              })()}
                             </div>
                             <div
                               className={`${bookingsPageStyles.seatType} ${s.type === "recliner"

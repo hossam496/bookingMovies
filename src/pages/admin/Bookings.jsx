@@ -169,7 +169,12 @@ const Bookings = () => {
                   const movie = b.movie?.movieName || b.movieName || b.movie?.title || 'Unknown Movie';
                   const user = b.user?.name || b.user?.fullName || b.customer || 'Guest';
                   const email = b.user?.email || b.email || '';
-                  const seats = Array.isArray(b.seats) ? b.seats.map(s => typeof s === 'string' ? s : (s.seatId || s.id || s.name || '-')).join(', ') : b.seatNumber || '-';
+                  const seats = Array.isArray(b.seats) 
+                    ? b.seats.map(s => {
+                        const val = typeof s === 'string' ? s : (s.seatId || s.id || s.name || '');
+                        return (val && val !== 'undefinedundefined') ? val : '-';
+                      }).join(', ') 
+                    : b.seatNumber || '-';
                   const total = b.amountPaise ? b.amountPaise / 100 : b.amount || b.totalAmount || 0;
                   const status = b.paymentStatus || b.status || 'Pending';
                   
