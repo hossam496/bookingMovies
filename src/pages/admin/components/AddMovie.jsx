@@ -256,7 +256,7 @@ const AddMovie = ({ initialData, onComplete, section }) => {
               { id: 'normal', label: 'Now Showing' },
               { id: 'featured', label: 'Featured' },
               { id: 'releaseSoon', label: 'Coming Soon' },
-              { id: 'latestTrailers', label: 'Trailer' }
+              { id: 'latestTrailer', label: 'Trailer' }
             ].map(type => (
               <label
                 key={type.id}
