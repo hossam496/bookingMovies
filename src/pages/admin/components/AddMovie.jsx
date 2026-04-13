@@ -237,8 +237,18 @@ const AddMovie = ({ initialData, onComplete, section }) => {
       if (onComplete) onComplete();
       else resetForm();
     } catch (err) {
-      console.error(err);
-      Swal.fire({title: 'Error', text: err.response?.data?.message || 'Failed to save movie', icon: 'error', background: '#111827', color: '#fff'});
+      console.error("Full Save Error:", err);
+      const serverMsg = err.response?.data?.message || 'Failed to save movie';
+      const detail = err.response?.data?.error;
+      const fullMsg = detail ? `${serverMsg}: ${typeof detail === 'object' ? JSON.stringify(detail) : detail}` : serverMsg;
+      
+      Swal.fire({
+        title: 'Error',
+        text: fullMsg,
+        icon: 'error',
+        background: '#111827',
+        color: '#fff'
+      });
     } finally {
       setLoading(false);
     }
