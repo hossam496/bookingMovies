@@ -10,7 +10,7 @@ const getImageUrl = (maybe) => {
   if (!maybe) return null;
   if (typeof maybe !== 'string') return null;
   if (maybe.startsWith('http://') || maybe.startsWith('https://')) return maybe;
-  return `${API_BASE}/uploads/${String(maybe).replace(/^uploads\//, '')}`;
+  return `/uploads/${String(maybe).replace(/^uploads\//, '')}`;
 };
 
 const ListMovies = ({ onEdit }) => {

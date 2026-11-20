@@ -131,7 +131,7 @@ function getImageUrl(candidate) {
   const s = candidate.trim();
   if (!s) return null;
   if (s.startsWith("http://") || s.startsWith("https://")) return s;
-  return `${API_BASE}/uploads/${s.replace(/^uploads\//, "")}`;
+  return `/uploads/${s.replace(/^uploads\//, "")}`;
 }
 
 function to24Hour(timeStr = "00:00", ampm = "") {

@@ -135,7 +135,7 @@ function getImageUrl(candidate) {
   if (!s) return null;
   if (s.startsWith("http://") || s.startsWith("https://")) return s;
   const cleaned = s.replace(/^uploads\//, "");
-  return `${API_BASE}/uploads/${cleaned}`;
+  return `/uploads/${cleaned}`;
 }
 
 /* convert hh:mm + AM/PM -> 24h hh:mm */

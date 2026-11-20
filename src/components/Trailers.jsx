@@ -9,7 +9,7 @@ const getUploadUrl = (input) => {
   if (!input) return null;
   if (typeof input === "string") {
     if (input.startsWith("http://") || input.startsWith("https://")) return input;
-    return `${API_BASE}/uploads/${input.replace(/^uploads\//, "")}`;
+    return `/uploads/${input.replace(/^uploads\//, "")}`;
   }
   if (typeof input === "object") {
     const possible = input.url || input.path || input.filename || input.file || input.image || "";

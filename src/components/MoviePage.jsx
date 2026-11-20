@@ -10,7 +10,7 @@ const getUploadUrl = (maybe) => {
   if (!maybe) return null;
   if (typeof maybe !== "string") return null;
   if (maybe.startsWith("http://") || maybe.startsWith("https://")) return maybe;
-  return `${API_BASE}/uploads/${String(maybe).replace(/^uploads\//, "")}`;
+  return `/uploads/${String(maybe).replace(/^uploads\//, "")}`;
 };
 
 const categoriesList = [
@@ -243,7 +243,13 @@ function MoviePage() {
                             group-hover:scale-110
                           `}
                           onError={(e) => {
-                            e.target.src = PLACEHOLDER;
+                            const raw = movie?.raw?.poster || movie?.raw?.latestTrailer?.thumbnail || movie?.raw?.thumbnail;
+                            if (!e.currentTarget.dataset.retried && raw) {
+                              e.currentTarget.dataset.retried = "true";
+                              e.currentTarget.src = `${API_BASE}/uploads/${String(raw).replace(/^uploads\//, "")}`;
+                            } else {
+                              e.target.src = PLACEHOLDER;
+                            }
                           }}
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />

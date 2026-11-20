@@ -10,7 +10,7 @@ const getUploadUrl = (maybe) => {
   if (!maybe) return null;
   if (typeof maybe !== "string") return null;
   if (maybe.startsWith("http://") || maybe.startsWith("https://")) return maybe;
-  return `${API_BASE}/uploads/${String(maybe).replace(/^uploads\//, "")}`;
+  return `/uploads/${String(maybe).replace(/^uploads\//, "")}`;
 };
 
 function Movies() {
@@ -92,7 +92,12 @@ function Movies() {
                     loading="lazy" 
                     className={moviesStyles.movieImage}
                     onError={(e) => {
-                      e.currentTarget.src = PLACEHOLDER;
+                      if (!e.currentTarget.dataset.retried) {
+                        e.currentTarget.dataset.retried = "true";
+                        e.currentTarget.src = `${API_BASE}/uploads/${String(rawImg).replace(/^uploads\//, "")}`;
+                      } else {
+                        e.currentTarget.src = PLACEHOLDER;
+                      }
                     }}
                   />
                 </Link>

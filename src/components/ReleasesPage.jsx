@@ -13,8 +13,7 @@ const getUploadUrl = (maybeFilenameOrUrl) => {
     maybeFilenameOrUrl.startsWith("https://")
   )
     return maybeFilenameOrUrl;
-  // assume it's a filename saved by multer
-  return `${API_BASE}/uploads/${maybeFilenameOrUrl.replace(/^uploads\//, "")}`;
+  return `/uploads/${maybeFilenameOrUrl.replace(/^uploads\//, "")}`;
 };
 
 const mapBackendMovieToUi = (m) => {
